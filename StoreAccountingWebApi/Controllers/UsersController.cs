@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using RESTFulSense.Controllers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace StoreAccountingWebApi.Controllers
 {
@@ -17,10 +18,11 @@ namespace StoreAccountingWebApi.Controllers
         private readonly IUserService userService;
         public UsersController(IUserService userService)
         {
-            this.userService = userService;            
+            this.userService = userService;             
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public async ValueTask<IActionResult> GetUsersListAsync()
         {
             IQueryable<User> products = userService.GetAllUsers();
@@ -32,6 +34,7 @@ namespace StoreAccountingWebApi.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "admin")]
         public async ValueTask<IActionResult> GetUserById(int id)
         {
             try
@@ -47,6 +50,7 @@ namespace StoreAccountingWebApi.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public async ValueTask<ActionResult<User>> CreateUserAsync(User user)
         {
             var newUser= await userService.AddUserAsync(user);
@@ -55,6 +59,7 @@ namespace StoreAccountingWebApi.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "admin")]
         public async ValueTask<IActionResult> EditUserAsync(User user)
         {
             try
@@ -75,6 +80,7 @@ namespace StoreAccountingWebApi.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "admin")]
         public async ValueTask<IActionResult> DeleteUserAsync(User user)
         {
             try

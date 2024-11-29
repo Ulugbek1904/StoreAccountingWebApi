@@ -12,15 +12,15 @@ using StoreAccountingWebApi.Brokers.StorageBrokers;
 namespace StoreAccountingWebApi.Migrations
 {
     [DbContext(typeof(StorageBroker))]
-    [Migration("20241007200139_Addingtable")]
-    partial class Addingtable
+    [Migration("20241016121822_AddTables")]
+    partial class AddTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -122,6 +122,9 @@ namespace StoreAccountingWebApi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Role")

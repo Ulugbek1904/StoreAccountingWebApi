@@ -1,10 +1,6 @@
-﻿using StoreAccountingWebApi.Models.Products;
-using StoreAccountingWebApi.Models.Sales;
-using StoreAccountingWebApi.Models.Users;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using STX.EFxceptions.SqlServer;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 

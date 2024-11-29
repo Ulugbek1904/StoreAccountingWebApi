@@ -2,6 +2,8 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StoreAccountingWebApi.Brokers.StorageBrokers;
 
 #nullable disable
@@ -15,7 +17,7 @@ namespace StoreAccountingWebApi.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -117,6 +119,9 @@ namespace StoreAccountingWebApi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Role")

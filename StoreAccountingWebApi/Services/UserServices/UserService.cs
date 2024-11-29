@@ -39,7 +39,7 @@ namespace StoreAccountingWebApi.Services.UserServices
         {
             var user = await storageBroker.SelectUserByIdAsync(id);
             if (user == null)
-                throw new UserNotFoundException(id);
+                throw new UserNotFoundException("User Not found");
 
             return user;
         }
@@ -50,7 +50,7 @@ namespace StoreAccountingWebApi.Services.UserServices
 
             if (existingUser == null)
             {
-                throw new UserNotFoundException(user.UserId);
+                throw new UserNotFoundException("User not found");
             }
 
             existingUser.LastName = user.LastName;
@@ -70,7 +70,7 @@ namespace StoreAccountingWebApi.Services.UserServices
 
             if (existingUser == null)
             {
-                throw new UserNotFoundException(user.UserId);
+                throw new UserNotFoundException("User not found");
             }
 
             await storageBroker.DeleteUserAsync(existingUser);

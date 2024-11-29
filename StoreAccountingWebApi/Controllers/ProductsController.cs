@@ -6,6 +6,7 @@ using StoreAccountingWebApi.Services.ProductServices;
 using RESTFulSense.Controllers;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace StoreAccountingWebApi.Controllers
 {
@@ -19,6 +20,7 @@ namespace StoreAccountingWebApi.Controllers
             this.productService = productService;            
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async ValueTask<ActionResult<Product>> CreateProduct(Product product)
         {
@@ -27,6 +29,7 @@ namespace StoreAccountingWebApi.Controllers
             return newProduct;
         }
 
+        [Authorize(Roles = "client,admin")]
         [HttpGet]
         public async Task<IActionResult> GetProductsStock()
         {
@@ -38,6 +41,7 @@ namespace StoreAccountingWebApi.Controllers
             return Ok(await products.ToListAsync());
         }
 
+        [Authorize(Roles = "client,admin")]
         [HttpGet("{id}")]
         public async ValueTask<IActionResult> GetProductById(int id)
         {
@@ -53,6 +57,7 @@ namespace StoreAccountingWebApi.Controllers
             }
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<IActionResult> GetExpiryProducts()
         {
@@ -65,6 +70,7 @@ namespace StoreAccountingWebApi.Controllers
             return Ok(await expiredProducts.ToListAsync());
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPut]
         public async ValueTask<IActionResult> EditProduct(Product product)
         {
@@ -85,6 +91,8 @@ namespace StoreAccountingWebApi.Controllers
             }
         }
 
+
+        [Authorize(Roles = "admin")]
         [HttpDelete]
         public async ValueTask<IActionResult> DeleteProduct(Product product)
         {

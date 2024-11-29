@@ -29,7 +29,7 @@ namespace StoreAccountingWebApi.Services.SaleServices
             var user = await userService.GetUserByIdAsync(userId);
             if (user == null)
             {
-                throw new UserNotFoundException(userId);
+                throw new UserNotFoundException("User not found");
             }
 
             foreach (var product in products)

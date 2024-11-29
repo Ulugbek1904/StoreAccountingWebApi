@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RESTFulSense.Controllers;
 using StoreAccountingWebApi.Models.Sales;
@@ -20,6 +21,7 @@ namespace StoreAccountingWebApi.Controllers
             this.saleService = saleService;
         }
 
+        [Authorize(Roles = "client,admin")]
         [HttpPost]
         public async ValueTask<IActionResult> BuyingProducts([FromBody] SaleRequest request)
         {
@@ -35,6 +37,7 @@ namespace StoreAccountingWebApi.Controllers
             }
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<IActionResult> GetAllSale()
         {
@@ -45,7 +48,7 @@ namespace StoreAccountingWebApi.Controllers
             return Ok(sales);
         }
 
-
+        [Authorize(Roles = "admin")]
         [HttpGet("{id}")]
         public async ValueTask<IActionResult> GetSaleById(int id)
         {
@@ -59,6 +62,7 @@ namespace StoreAccountingWebApi.Controllers
         }
 
 
+        [Authorize(Roles = "admin")]
         [HttpGet("{userId}")]
         public async ValueTask<IActionResult> GetSalesHistoryByUserAsync(int userId)
         {
@@ -68,6 +72,7 @@ namespace StoreAccountingWebApi.Controllers
             return Ok(sales);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<IActionResult> GetProductSalesStatistics(DateTime startDate, DateTime endDate)
         {
